@@ -1,0 +1,2 @@
+ansible_user: __the_user__
+ansible_password: __the_password__
