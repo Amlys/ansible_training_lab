@@ -26,4 +26,3 @@
         image: httpd
         ports:
           - "80:80"
-        docker_host: unix://var/run/docker.sock
