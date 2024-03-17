@@ -8,5 +8,18 @@
   pre_tasks:
     - name: create www-data
       user: name=www-data state=present
+
+    - name: Download Docker Compose binary
+      ansible.builtin.get_url:
+        url: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 'u+x,g+x'
+
+    - name: Ensure Docker Compose is executable
+      ansible.builtin.file:
+        path: /usr/local/bin/docker-compose
+        state: file
+        mode: '0755'
+
   roles:
     - { role: ansible-role-containerized-wordpress }
