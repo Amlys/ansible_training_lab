@@ -1,0 +1,4 @@
+---
+system_user: vagrant
+# on peut créer des variables directement ici sans qu'elles soient dàjà
+# dans defaults...

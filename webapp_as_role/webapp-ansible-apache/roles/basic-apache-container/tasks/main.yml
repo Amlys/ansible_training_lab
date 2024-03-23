@@ -1,0 +1,22 @@
+---
+# tasks file for ansible-role-basic-apache-container
+- include_tasks: "setup-centos.yml"
+- include_tasks: "install-docker.yml"
+# les includes on importes les tasks d'avant dans les autres fichiers.
+
+- name: Copy website file template
+  template:
+    src: "{{ file_template }}"
+    dest: "/home/{{ system_user }}/index.html"
+    # Là on variabilise
+    # Dans le dossier defaults par defaut mais on peut surcharger après dans
+    # le dossier vars
+
+- name: Create Apache container
+  docker_container:
+    name: webapp
+    image: httpd
+    ports:
+      - "{{ webapp_port }}:{{ apache_port }}"
+    volumes:
+      - "/home/{{ system_user }}/index.html:/usr/local/apache2/htdocs/index.html"
